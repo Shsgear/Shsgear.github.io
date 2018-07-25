@@ -1,11 +1,17 @@
 ---
 title: evil setInterval与优化
 date: 2018-07-18 18:11:41
-tags:
+categories: 
+            - javascript
+            - 优化
+tags: 
+      - javascript
+      - setInterval优化
+      - setTimeout代替setInterval
+      - 定时器
+      - 闭包closure
 ---
-邪恶的setInterval
-<p data-height="265" data-theme-id="0" data-slug-hash="bjePbq" data-default-tab="js,result" data-user="Shsgear" data-embed-version="2" data-pen-title="邪恶的setInterval" class="codepen">See the Pen <a href="https://codepen.io/Shsgear/pen/bjePbq/">邪恶的setInterval</a> by Shsgear (<a href="https://codepen.io/Shsgear">@Shsgear</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+# 邪恶的setInterval
 
 1. 不关心回调是否还在执行
      有些时候我们执行完函数的时间要比间隔时间稍长。假如我们需要每5s从服务器发起请求，网络延迟、服务器不响应和其他可变因素可能阻止请求不能按时完成。 那么请求队列可能就并不是按照顺序来返回的
@@ -16,7 +22,9 @@ tags:
 3. 不灵活
     有时候我们可能需要可配置的执行次数。但是setInterval不提供
 
-
+<!-- more -->
+<p data-height="265" data-theme-id="0" data-slug-hash="bjePbq" data-default-tab="js,result" data-user="Shsgear" data-embed-version="2" data-pen-title="邪恶的setInterval" class="codepen">See the Pen <a href="https://codepen.io/Shsgear/pen/bjePbq/">邪恶的setInterval</a> by Shsgear (<a href="https://codepen.io/Shsgear">@Shsgear</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 
 解决:

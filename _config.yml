@@ -5,10 +5,10 @@
 # Site
 title: Shsgear's Blog
 subtitle: anything i want to write down
-description: You just activated my trap card
+description: You just activated my trap card :D
 keywords: javascript blog
 author: Shsgear
-language: cn-Zh
+language: zh-CN
 timezone:
 
 # URL
@@ -73,7 +73,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
+
+
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +84,10 @@ deploy:
   type: git
   repository: git@github.com:Shsgear/Shsgear.github.io.git
   branch: master
+
+# LocalSearch
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
