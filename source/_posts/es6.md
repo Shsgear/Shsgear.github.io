@@ -6,9 +6,9 @@ tags:
       - es6
 ---
 
-<!-- more -->
-
 # Destructuring
+
+<!-- more -->
 
 ``` javascript
 let [x, y, ...z] = [1, 2, 3, 4, 5];
