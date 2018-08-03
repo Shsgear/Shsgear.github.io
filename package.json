@@ -7,7 +7,7 @@
   },
   "scripts": {
     "predone": "echo '/************************\n exuting hexo clean and hexo deploy \n ********************/'",
-    "done": "hexo clean && hexo g && hexo d && npm run pushsource",
+    "done": "hexo clean && hexo g && hexo d",
     "postdone": "echo '/*************************\n finish \n *****************************/'"
   },
   "dependencies": {
