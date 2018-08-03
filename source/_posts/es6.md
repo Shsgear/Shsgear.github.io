@@ -6,6 +6,8 @@ tags:
       - es6
 ---
 
+<!-- more -->
+
 # Destructuring
 
 ``` javascript
