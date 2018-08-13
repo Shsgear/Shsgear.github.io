@@ -4,6 +4,7 @@ date: 2018-08-03 15:47:05
 tags: 
       - javascript
       - stack
+      - 基础
 ---
 
 # JavaScript中的变量对象与堆栈

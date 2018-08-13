@@ -1,6 +1,10 @@
 ---
 title: React项目整合typescript
 date: 2018-08-12 01:44:28
+categories: 
+            - javascript
+            - React
+            - npm
 tags: 
      -- 易忘重要知识点
      -- npm

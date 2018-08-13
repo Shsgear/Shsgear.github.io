@@ -1,6 +1,9 @@
 ---
 title: es6
 date: 2018-08-03 17:26:36
+categories: 
+            - javascript
+            - es6
 tags: 
       - javascript
       - es6
