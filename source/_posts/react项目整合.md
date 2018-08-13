@@ -1,5 +1,5 @@
 ---
-title: npm相关
+title: React项目整合typescript
 date: 2018-08-12 01:44:28
 tags: 
      -- 易忘重要知识点
@@ -19,6 +19,8 @@ tags:
     - [将项目跑起来](#%E5%B0%86%E9%A1%B9%E7%9B%AE%E8%B7%91%E8%B5%B7%E6%9D%A5)
         - [定义处理sass的`npm scripts`](#%E5%AE%9A%E4%B9%89%E5%A4%84%E7%90%86sass%E7%9A%84npm-scripts)
         - [将`npm srcipts`流程打通](#%E5%B0%86npm-srcipts%E6%B5%81%E7%A8%8B%E6%89%93%E9%80%9A)
+
+<!-- more -->
 
 # 项目捣鼓第一坑（React + typescript）
 
@@ -86,7 +88,7 @@ tags:
 
 `bin` 表示react-scripts的可执行文件指向了`./bin/react-scripts.js`。即`环境变量Path`中安装了`react-scripts`，执行`react-scripts`时便指向`react-scripts.js`。后面的dependencies都是所需配置的依赖。
 
-![/bin/react-scripts.js](../images/react_ts_script.png)
+![/bin/react-scripts.js](/images/react_ts_script.png)
 
 看到这里就恍然大悟了。这里`start build`等命令都指向了`scripts/start.js`等文件。`start.js` `build.js`里面就是webpack、devServer等开发环境和生产环境的配置
 
@@ -213,6 +215,46 @@ node-sass-chokidar src/ -o src/ --watch --recursive
 ``` scss
 @import 'styles/_colors.scss'; //假设styles目录在src下
 @import 'bootstrap/index.scss'; //从node_modules目录下引入bootstrap下的样式文件
+```
+
+接着就可以修改App.scss，之后src目录下就会生成css文件。由于js里引入的依旧是css，所以其他都不用改动。
+
+> 经验: 这里使用Vscode可能会出现一个兼容性问题。就是vscode在编辑文件时会将文件处于lock状态，按下保存后由于node-sass-chokidar一直在后台监听文件改动，此时文件处于lock状态，就会就会报文件读写错误
+
+``` bash
+=> changed:  
+I:\self\my-app\src\App.scss
+{
+  "status": 3,
+  "message": "File to read not found or unreadable: I:/self/my-app/src/App.scss",
+  "formatted": "Internal Error: File to read not found or unreadable: I:/self/my-app/src/App.scss\n"
+}
+```
+
+>解决方案：  
+使用node-sass-chokidar的watch轮询配置选项,
+`use-polling`表示监听使用轮询方式
+`polling-interval`代表文件预热间隔(大致理解为监听间隔) 默认100
+
+``` JSON
+'  --use-polling              Watch using polling (chokidars\'s polling option)',
+'  --polling-interval         Interval of filesystem folling if polling is being used'
+  ```
+
+所以最终的`npm scripts`可能是这样
+
+``` JSON
+
+"scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive --use-polling --polling-interval 200",
+    "start-js": "react-scripts-ts start",
+    "build-js": "react-scripts-ts build",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
 ```
 
 ### 将`npm srcipts`流程打通
