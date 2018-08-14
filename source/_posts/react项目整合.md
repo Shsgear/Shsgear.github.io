@@ -46,7 +46,7 @@ tags:
 
 2. 创建新的项目
 
-    ``` bash
+    ```bash
     # 默认方式 使用react-scripts
     create-react-app foo
 
@@ -65,7 +65,7 @@ tags:
 
 项目的`package.json`文件
 
-``` JSON
+```JSON
 "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -76,7 +76,7 @@ tags:
 
 定义`npm scripts`的`start`处执行了`react-scripts start`。此时我们将视角转向`node_modules`下的`react-scripts`
 
-``` JSON
+```JSON
     // react-scripts/package.json
     "bin": {
     "react-scripts-ts": "./bin/react-scripts-ts.js"
