@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[use travis ci]]></title>
+    <url>%2F2018%2F10%2F11%2Fuse-travis-ci%2F</url>
+    <content type="text"><![CDATA[挖坑，待填]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2018%2F10%2F11%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>吹水</category>
+      </categories>
+      <tags>
+        <tag>chat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[从next到material主题]]></title>
+    <url>%2F2018%2F10%2F10%2Fchange-hexo-theme%2F</url>
+    <content type="text"><![CDATA[换主题啦! &gt;&gt;&gt; 假惺惺怀下旧，纪念下不到三周月的next以前用的是next主题，其实刚开始觉得挺好看的。没有繁杂冗余的按钮，配色就只有两种：黑和白。还带有一点缓动效果。寥寥黑白，不施粉黛 C位出道，material主题Matiral Design好像近几年开始由谷歌带火的，称为材料设计语言。色彩灵动，多设备统一性，实体的光影和边缘辅以空间、配色、比例等打造的视觉效果让人似乎能触摸到无限接近虚拟世界中的真实物质质感。]]></content>
+      <categories>
+        <category>吹水</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>theme</tag>
+        <tag>material design</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React项目整合typescript]]></title>
+    <url>%2F2018%2F08%2F12%2Freact%E9%A1%B9%E7%9B%AE%E6%95%B4%E5%90%88%2F</url>
+    <content type="text"><![CDATA[项目捣鼓第一坑（React + typescript） React项目配置起手 安装create-react-app 窥探react-scripts 配置typescript 配置node-sass 将项目跑起来 定义处理sass的npm scripts 将npm srcipts流程打通 项目捣鼓第一坑（React + typescript）React项目配置起手项目起手参考了TypeScript-React-Starter 安装create-react-app 全局安装create-react-app 123npm install -g create-react-app#yarn add -g create-react-app 使用npm/cnpm/yarn都可以。此处不再赘述 创建新的项目 12345# 默认方式 使用react-scriptscreate-react-app foo# 自定义 scripts 包方式create-react-app foo --scripts-version=react-scripts-ts create-react-app简称CRA. 执行上述的bash操作后，会生成项目文件夹。但是没有webpack的配置文件。这里就要介绍react-scripts了。 This package includes scripts and configuration used by Create React App. 就是说这是给CRA使用的包含一系列的scripts和配置的包。无需开发者关心ES6,JSX…的语法支持、devServer启动、js引入css文件、生成打包文件等等一系列的繁琐配置 窥探react-scripts项目的package.json文件 123456"scripts": &#123; "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test --env=jsdom", "eject": "react-scripts eject"&#125; 定义npm scripts的start处执行了react-scripts start。此时我们将视角转向node_modules下的react-scripts 1234567891011// react-scripts/package.json"bin": &#123;"react-scripts-ts": "./bin/react-scripts-ts.js"&#125;,"dependencies": &#123; "autoprefixer": "7.1.6", "babel-jest": "^22.1.0", "babel-loader": "^7.1.2", "babel-preset-react-app": "^3.1.1", ...&#125;, bin 表示react-scripts的可执行文件指向了./bin/react-scripts.js。即环境变量Path中安装了react-scripts，执行react-scripts时便指向react-scripts.js。后面的dependencies都是所需配置的依赖。 看到这里就恍然大悟了。这里start build等命令都指向了scripts/start.js等文件。start.js build.js里面就是webpack、devServer等开发环境和生产环境的配置 配置typescript注意我们使用create-react-app使用自定义包安装react-scripts-ts。即create-react-app foo --scripts-version=react-scripts-ts react-scripts-ts is a set of adjustments to take the standard create-react-app project pipeline and bring TypeScript into the mix. 配置完成后目录结构如下 1234567891011121314151617181920.├── public│ ├── favicon.ico│ ├── index.html│ └── manifest.json├── src│ ├── App.css│ ├── App.test.tsx│ ├── App.tsx│ ├── index.css│ ├── index.tsx│ ├── logo.svg│ └── registerServiceWorker.ts├── images.d.ts├── package.json├── README.md├── tsconfig.json├── tsconfig.prod.json├── tsconfig.test.json└── tslint.json image.d.ts 定义了静态资源图片的类型。不定义的话直接import,Typescript会报错Cannot find module &#39;./logo.png&#39;. tsconfig.json ts配置 | Key | Value || :—— | :——|| target | 转换后的目标语言。可选es6 es5。默认es5 || jsx | react| 配置node-sass Note: facebook官方推荐使用node-sass-chokidar node-sass has been reported as having the following issues: node-sass –watch has been reported to have performance issues in certain conditions when used in a virtual machine or with docker. Infinite styles compiling #1939 node-sass has been reported as having issues with detecting new files in a directory #1891 node-sass-chokidar is used here as it addresses these issues. 这里有一个问题就是node-sass-chokidar依赖node-sass包。所以执行npm i node-sass-chokidar -S时可能会提示安装node-sass错误。无论使用npm或cnpm或yarn都会有这个情况。此处的解决方案如下： 先将registry指向淘宝的镜像源 1234#npmnpm config set registry http://registry.npm.taobao.org#yarnyarn config set registry http://registry.npm.taobao.org 指定node-sass二进制文件下载源： 1234#npmnpm config set sass-binary-site http://npm.taobao.org/mirrors/node-sass#yarnyarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass 或者可以通过执行node -p &quot;[process.platform, process.arch, process.versions.modules].join(&#39;-&#39;)&quot;。执行结果为win32-x64-57。到淘宝镜像https://npm.taobao.org/mirrors/node-sass/下载node-sass的对应名称的二进制文件win32-x64-57_binding.node。再设置sass二进制文件路径 1234#npmnpm config set sass-binary-path e:/web/win32-x64-57_binding.node#yarnyarn config set sass-binary-path e:/web/win32-x64-57_binding.node 最后执行npm i node-sass-chokidar -S进行安装 Note: 由于此处node-sass依赖绑定了本地文件，将无法更新node-sass.所以尽量考虑第一种方案 将项目跑起来定义处理sass的npm scripts由于我们上面安装了node-sass模块。将css文件全部改为scss后，需要在项目的package.json中增加处理scss的scripts 123456"scripts": &#123;+ "build-css": "node-sass-chokidar src/ -o src/",+ "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive", "start": "react-scripts start", "build": "react-scripts build", "test": "react-scripts test --env=jsdom", 12#将src目录下的scss文件编译后输出css文件到src下的同级目录node-sass-chokidar src/ -o src/ 12#以递归方式监视src目录下的scss文件。并在同级下生成css文件node-sass-chokidar src/ -o src/ --watch --recursive Note: 如果在scss文件中想alias引入某个文件夹下的样式文件。可配置 node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ 就可以像这样引入 12@import 'styles/_colors.scss'; //假设styles目录在src下@import 'bootstrap/index.scss'; //从node_modules目录下引入bootstrap下的样式文件 接着就可以修改App.scss，之后src目录下就会生成css文件。由于js里引入的依旧是css，所以其他都不用改动。 经验: 这里使用Vscode可能会出现一个兼容性问题。就是vscode在编辑文件时会将文件处于lock状态，按下保存后由于node-sass-chokidar一直在后台监听文件改动，此时文件处于lock状态，就会就会报文件读写错误 1234567=&gt; changed: I:\self\my-app\src\App.scss&#123; "status": 3, "message": "File to read not found or unreadable: I:/self/my-app/src/App.scss", "formatted": "Internal Error: File to read not found or unreadable: I:/self/my-app/src/App.scss\n"&#125; 解决方案：使用node-sass-chokidar的watch轮询配置选项,use-polling表示监听使用轮询方式polling-interval代表文件预热间隔(大致理解为监听间隔) 默认100 12' --use-polling Watch using polling (chokidars\'s polling option)',' --polling-interval Interval of filesystem folling if polling is being used' 所以最终的npm scripts可能是这样 1234567891011"scripts": &#123; "build-css": "node-sass-chokidar src/ -o src/", "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive --use-polling --polling-interval 200", "start-js": "react-scripts-ts start", "build-js": "react-scripts-ts build", "start": "npm-run-all -p watch-css start-js", "build": "npm-run-all build-css build-js", "test": "react-scripts-ts test --env=jsdom", "eject": "react-scripts-ts eject" &#125;, 将npm srcipts流程打通我们想npm start就能完成sass编译以及运行react-scripts提供的配置。此时我们需要安装npm-run-all 1234#npmnpm i npm-run-all -S#yarnyarn add npm-run-all 然后将start和build改成包含css预处理的命令 123456789101112"scripts": &#123; "build-css": "node-sass-chokidar src/ -o src/", "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive",- "start": "react-scripts start",- "build": "react-scripts build",+ "start-js": "react-scripts start",+ "start": "npm-run-all -p watch-css start-js",+ "build-js": "react-scripts build",+ "build": "npm-run-all build-css build-js", "test": "react-scripts test --env=jsdom", "eject": "react-scripts eject" &#125; 执行npm start]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>React</category>
+        <category>npm</category>
+      </categories>
+      <tags>
+        <tag>-- 易忘重要知识点 -- npm -- yarn -- create-react-app -- typescript -- node-sass</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[es6]]></title>
+    <url>%2F2018%2F08%2F03%2Fes6%2F</url>
+    <content type="text"><![CDATA[Destructuring 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899let [x, y, ...z] = [1, 2, 3, 4, 5];console.log(x, y, z);let [l, m, ...n] = ['a'];// 结构不成功 输出undefined// 解构的右边必须是具有iterator接口的结构console.log(l, m, n);// a// undefined// []// 默认值生效的条件是，对象的属性值严格等于undefinedlet [b = true] = [];console.log(b); // truelet [c = 1, d = 3] = [2];console.log(c, d); // 2 3function f () &#123; console.log('YYY');&#125;let [a = f()] = [1]; //惰性求值// 等价于// let a;// if ([1][0] === undefined) &#123;// a = f();// &#125; else &#123;// x = [1][0]// &#125;let &#123; foo, bar &#125; = &#123; foo: "foo", baz: "baz" &#125;;console.log(foo, bar); // foo undefinedlet obj = &#123; first: "A", last: "B" &#125;;let &#123; first: fir, last: last &#125; = obj;console.log(fir, last);let objA = &#123; p: ['Hello', &#123; y: 'World' &#125;]&#125;let &#123; p: [o, &#123; y: k &#125;] &#125; = objA;console.log(o, k); //p是匹配模式，此处未赋值。 m: Hello n: World// 用途// 交换变量let nA = 1;let nB = 2;[nA, nB] = [nB, nA];console.log(nA, nB);// 从函数返回多个值function example() &#123; return &#123; eA: 1, eB: 2 &#125;;&#125;let &#123; eA, eB &#125; = example();console.log(eA, eB);// 函数参数定义function f1([x, y, z]) &#123; /* ... */&#125;f1([1, 2, 3]);function f2(&#123; x, y, z &#125;) &#123; /* ... */&#125;f2(&#123; z: 1, x: 2, y: 1 &#125;);// 提取接口返回值let jsonData = &#123; status: 'OK', id: 11, data: [122, 122]&#125;let &#123;status, id, data: number&#125; = jsonData;console.log(status, number);// 函数参数值的默认值function defaultParam(&#123; delay = 1000, str = 'Hello World!' &#125; = &#123;&#125;) &#123; setTimeout(() =&gt; &#123; console.log(str); &#125;, delay);&#125;defaultParam();defaultParam(&#123;str: 'Fxxk off'&#125;);// 加载模块的指定方法// import &#123; Button &#125; from 'element-ui'; Symbol123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990const mySymbol = Symbol();console.log('mySymbol === Symbol()', mySymbol === Symbol());let a = &#123;&#125;;// method 1a = &#123; [mySymbol]: 'Hello mySymbol'&#125;// method 2a[mySymbol] = 'Hello anotherSymbol!'; // 为对象赋予Symbol属性// method 3Object.defineProperty(a, mySymbol, &#123; value: 'Hello thirdSymbol!' &#125;);a.mySymbol = 'Hello stringMySymbol'; // .操作符为对象赋予的是字符串属性console.log(a[mySymbol]) // Hello Symbolconsole.log(a['mySymbol']) // "Hello stringMySymbol"// 常规遍历对象不输出Symbol属性// 只输出字符串属性for (let i in a) &#123; console.log('props: ', i); &#125;// 只输出字符串属性console.log(Object.getOwnPropertyNames(a));// 此方法可以获取console.log(Object.getOwnPropertySymbols(a));// 或者此方法输出所有类型的键名console.log(Reflect.ownKeys(a));/* Symbol的用处 */// stage1 '魔法字符串' 耦合性太强。不变维护let getArea = (shape, option) =&gt; &#123; let area = 0; switch (shape) &#123; case 'Triangle': area = (option.width * option.height) * .5; break; /* ... */ default: break; &#125; return area;&#125;getArea('Triangle', &#123; width: 100, height: 100 &#125;);// stage2 将字符串变成变量。易于维护let areaShape = &#123; triangle: 'Triangle'&#125;getArea = (shape, option) =&gt; &#123; let area = 0; switch (shape) &#123; case areaShape.triangle: area = (option.width * option.height) * .5; break; /* ... */ default: break; &#125; return area;&#125;getArea(areaShape.triangle, &#123; width: 100, height: 100 &#125;);// stage3 变量并不需要指定一个值。只需要和其他变量区别开来，Symbol很适合areaShape = &#123; triangle: Symbol(), rectAngle: Symbol()&#125;getArea = (shape, option) =&gt; &#123; let area = 0; switch (shape) &#123; case areaShape.triangle: area = (option.width * option.height) * .5; break; /* ... */ default: break; &#125; return area;&#125;getArea(areaShape.triangle, &#123; width: 100, height: 100 &#125;); Set Map12345678910111213141516171819const s = new Set();[2, 3, 4, 5, 5, 2, 3, 6].forEach(x =&gt; s.add(x));// Set的add會將重复的值舍弃// 用法// 数组去重let a = [...new Set([1, 1, 2, 2, 3, 3, '3'])];console.log(a);// 实现并集let arrA = new Set([1, 2, 3]);let arrB = new Set([2, 3, 4]);let union = [...new Set([...arrA, ...arrB])];console.log('union', union);// 实现交集let intersect = new Set([...arrA].filter(x =&gt; arrB.has(x)));console.log('intersect', intersect);]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>es6</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>es6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JavaScript中的变量对象与堆栈]]></title>
+    <url>%2F2018%2F08%2F03%2Fstack%2F</url>
+    <content type="text"><![CDATA[JavaScript中的变量对象与堆栈JavaScript中并没有严格意义上区分栈内存(FILO)与堆内存(FIFO)。 javascript执行上下文时会产生变量对象。一般变量对象存在堆内存中。为便于理解，将其与堆内存区别开来 1.变量对象与基本数据类型基本数据类型(undefined, Null, Number, String, Boolean)往往直接保存在变量对象中。基础数据类型都是按值访问，因此我们可以直接操作保存在变量中的实际的值。 123let a = 1;let b = a;b = 2; 2.引用数据类型与堆内存]]></content>
+      <categories>
+        <category>javascript es6</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>stack</tag>
+        <tag>基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[evil setInterval与优化]]></title>
+    <url>%2F2018%2F07%2F18%2Fevil-setInterval%E4%B8%8E%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[邪恶的setInterval 不关心回调是否还在执行 有些时候我们执行完函数的时间要比间隔时间稍长。假如我们需要每5s从服务器发起请求，网络延迟、服务器不响应和其他可变因素可能阻止请求不能按时完成。 那么请求队列可能就并不是按照顺序来返回的 忽略执行函数时的错误 setInterval调用函数时若函数体内发生错误，不会停止而是继续运行错误的代码 不灵活 有时候我们可能需要可配置的执行次数。但是setInterval不提供 See the Pen 邪恶的setInterval by Shsgear (@Shsgear) on CodePen. 解决:优化后的interval，采用setTimeout See the Pen setInterval optimize by Shsgear (@Shsgear) on CodePen. 1234567891011121314151617// setInterval优化const interval = (func, wait, times) =&gt; &#123; let intervalInner = function (w, t)&#123; return function() &#123; if (typeof t === 'undefined' || t--&gt; 0) &#123; setTimeout(intervalInner, w); try &#123; func.apply(null); &#125; catch(err) &#123; throw err.toString(); &#125; &#125; &#125; &#125;(wait, times) setTimeout(intervalInner, wait);&#125; 此处是func无参数调用。假如func有参数，那么需要改进下函数 1234567891011121314151617181920const interval = (func, funcArgs, wait, times) =&gt; &#123; let intervalInner = function (w, t)&#123; return function() &#123; if (typeof t === 'undefined' || t--&gt; 0) &#123; setTimeout(intervalInner, w); try &#123; if (funcArgs !== undefined &amp;&amp; funcArgs.length &gt; 0) &#123; func.apply(null, [...funcArgs]); &#125; else &#123; func.apply(null); &#125; &#125; catch(err) &#123; t = 0; throw err.toString(); &#125; &#125; &#125; &#125;(wait, times) setTimeout(intervalInner, wait);&#125;]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>优化</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>setInterval优化</tag>
+        <tag>setTimeout代替setInterval</tag>
+        <tag>定时器</tag>
+        <tag>闭包closure</tag>
+      </tags>
+  </entry>
+</search>

@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            React项目整合typescript | 
+        
+        Shsgear&#39;s Blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="
+项目捣鼓第一坑（React + typescript）
+React项目配置起手
+安装create-react-app
+窥探react-scripts
+配置typescript
+配置node-sass
+
+
+将项目跑起来
+定义处理sass的npm scripts
+将npm srcipts流程打通
+
+
+
+
+">
+    <meta name="keywords" content="shsgear blog javascript frontend,-- 易忘重要知识点 -- npm -- yarn -- create-react-app -- typescript -- node-sass">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Shsgear&#39;s Blog">
+    <meta name="msapplication-starturl" content="https://shsgear.github.io/2018/08/12/react项目整合/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Shsgear&#39;s Blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://shsgear.github.io/2018/08/12/react项目整合/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="React项目整合typescript | Shsgear&#39;s Blog">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="
+项目捣鼓第一坑（React + typescript）
+React项目配置起手
+安装create-react-app
+窥探react-scripts
+配置typescript
+配置node-sass
+
+
+将项目跑起来
+定义处理sass的npm scripts
+将npm srcipts流程打通
+
+
+
+
+">
+    <meta property="og:article:tag" content="-- 易忘重要知识点 -- npm -- yarn -- create-react-app -- typescript -- node-sass"> 
+
+    
+        <meta property="article:published_time" content="Sun Aug 12 2018 01:44:28 GMT+0000">
+        <meta property="article:modified_time" content="Thu Oct 11 2018 07:07:33 GMT+0000">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://shsgear.github.io/2018/08/12/react项目整合/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://shsgear.github.io/2018/08/12/react项目整合/index.html",
+    "headline": "React项目整合typescript",
+    "datePublished": "Sun Aug 12 2018 01:44:28 GMT+0000",
+    "dateModified": "Thu Oct 11 2018 07:07:33 GMT+0000",
+    "author": {
+        "@type": "Person",
+        "name": "Shsgear",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/my_avatar.jpg"
+        },
+        "description": "This world, so trife,But, i have a dream"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Shsgear&#39;s Blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",-- 易忘重要知识点 -- npm -- yarn -- create-react-app -- typescript -- node-sassshsgear blog javascript frontend",
+    "description": "
+项目捣鼓第一坑（React + typescript）
+React项目配置起手
+安装create-react-app
+窥探react-scripts
+配置typescript
+配置node-sass
+
+
+将项目跑起来
+定义处理sass的npm scripts
+将npm srcipts流程打通
+
+
+
+
+",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#项目捣鼓第一坑（React-typescript）"><span class="post-toc-number">1.</span> <span class="post-toc-text">项目捣鼓第一坑（React + typescript）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#React项目配置起手"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">React项目配置起手</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装create-react-app"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">安装create-react-app</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#窥探react-scripts"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">窥探react-scripts</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置typescript"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">配置typescript</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置node-sass"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">配置node-sass</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#将项目跑起来"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">将项目跑起来</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义处理sass的npm-scripts"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">定义处理sass的npm scripts</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将npm-srcipts流程打通"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">将npm srcipts流程打通</span></a></li></ol></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                React项目整合typescript
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/my_avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Shsgear</strong>
+        <span>8月 12, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3UlEQVR42u3awW4bMQwE0Pz/T7fXAoXjGdJtbOntqVhv1noK0AlJff268vrCxsbGxsbGxsbGfkv2V3z9+fzfb3j4ZX/97KPnk++arRkbGxv7BvaT//ofLCXZmoeL+HaJ+XryZ7CxsbFvYG8Y30dR/kwbmUXQYmNjY2OPQmVW6iRUbGxsbOxNgCWRs4nAZCuxsbGxsffhlATVLJaS0PqvvTRsbGzst2fPBr0/++8fm29jY2Njvxn7312zEe+spRWtBxsbG/tQdrKsWaTlIZTcyYuZ4eFLbGxs7I9l5434vJ3UxltyuOcF97GxsbEPZbdt/U2jvx3ctp++YDyAjY2N/YHs9o/+9pDlpjHUbtaTXww2Njb2BeykqZQvqx0YtMVPfQcbGxv7UPamHb8f6G7eUBcn2NjY2Eez8wIjLwPa5zdNpWjMgI2NjX00Ow+Gzf38cE8brlH0YmNjY1/Dnh24nJU0+be342RsbGzsO9mztns+Epgtug22uhTBxsbG/nB2G137wXD7hvYXU8y3sbGxsY9gzwJsdnynPdyTfFoUKtjY2NjXsGfD11e1pWYhF20WNjY29qHsPMyiFvxoO2bHffI1Y2NjY5/NzhtGUeMmbg9ttqPdGmxsbOzb2JuB7vek9lBOO8AYNpWwsbGxP5y9OWozC542LPM3FAGGjY2NfRC7HQm0xUDy5s2GFuNhbGxs7GvYeQs+Lwlmwbb/FBsbG/sedvK6trWUtIdmDam8dMHGxsbGbu/nW5ZT88HAk2DDxsbGPpS9iahhm360KcnbnhwMwsbGxj6U3YZBElT5p20rqi14sLGxse9h71tFm3IlLzxWgYqNjY19AXtzHCfBbAYARfPotb00bGxs7EPZm6ZPG5Ozb8fGxsbGzkuFfVmShFletGBjY2PfzJ6NXTflxKtWEoUcNjY29tHsdtA7W1DeWpoNhutSBBsbG/sI9j0XNjY2NjY2NjY29ttcvwGdVZrdnzFYSAAAAABJRU5ErkJggg==">
+    
+</ul>
+
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/易忘重要知识点-npm-yarn-create-react-app-typescript-node-sass/">-- 易忘重要知识点 -- npm -- yarn -- create-react-app -- typescript -- node-sass</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=React项目整合typescript&url=https://shsgear.github.io/2018/08/12/react项目整合/index.html&pic=https://shsgear.github.io/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=React项目整合typescript&url=https://shsgear.github.io/2018/08/12/react项目整合/index.html&via=Shsgear" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://shsgear.github.io/2018/08/12/react项目整合/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://shsgear.github.io/2018/08/12/react项目整合/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <ul>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E6%8D%A3%E9%BC%93%E7%AC%AC%E4%B8%80%E5%9D%91%EF%BC%88react--typescript%EF%BC%89">项目捣鼓第一坑（React + typescript）</a><ul>
+<li><a href="#react%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%B5%B7%E6%89%8B">React项目配置起手</a><ul>
+<li><a href="#%E5%AE%89%E8%A3%85create-react-app">安装create-react-app</a></li>
+<li><a href="#%E7%AA%A5%E6%8E%A2react-scripts">窥探react-scripts</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEtypescript">配置typescript</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEnode-sass">配置node-sass</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B0%86%E9%A1%B9%E7%9B%AE%E8%B7%91%E8%B5%B7%E6%9D%A5">将项目跑起来</a><ul>
+<li><a href="#%E5%AE%9A%E4%B9%89%E5%A4%84%E7%90%86sass%E7%9A%84npm-scripts">定义处理sass的<code>npm scripts</code></a></li>
+<li><a href="#%E5%B0%86npm-srcipts%E6%B5%81%E7%A8%8B%E6%89%93%E9%80%9A">将<code>npm srcipts</code>流程打通</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="项目捣鼓第一坑（React-typescript）"><a href="#项目捣鼓第一坑（React-typescript）" class="headerlink" title="项目捣鼓第一坑（React + typescript）"></a>项目捣鼓第一坑（React + typescript）</h1><h2 id="React项目配置起手"><a href="#React项目配置起手" class="headerlink" title="React项目配置起手"></a>React项目配置起手</h2><p>项目起手参考了<a href="https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter" target="_blank" rel="noopener">TypeScript-React-Starter</a></p>
+<h3 id="安装create-react-app"><a href="#安装create-react-app" class="headerlink" title="安装create-react-app"></a>安装create-react-app</h3><ol>
+<li><p>全局安装<code>create-react-app</code></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-app</span><br><span class="line"></span><br><span class="line"><span class="comment">#yarn add -g create-react-app</span></span><br></pre></td></tr></table></figure>
+<p>使用npm/cnpm/yarn都可以。此处不再赘述</p>
+</li>
+<li><p>创建新的项目</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认方式 使用react-scripts</span></span><br><span class="line">create-react-app foo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义 scripts 包方式</span></span><br><span class="line">create-react-app foo --scripts-version=react-scripts-ts</span><br></pre></td></tr></table></figure>
+<p> create-react-app简称<code>CRA</code>. 执行上述的bash操作后，会生成项目文件夹。但是没有webpack的配置文件。这里就要介绍react-scripts了。</p>
+<blockquote>
+<p>This package includes scripts and configuration used by Create React App.</p>
+</blockquote>
+<p> 就是说这是给CRA使用的包含一系列的scripts和配置的包。无需开发者关心ES6,JSX…的语法支持、devServer启动、js引入css文件、生成打包文件等等一系列的繁琐配置</p>
+<hr>
+</li>
+</ol>
+<h3 id="窥探react-scripts"><a href="#窥探react-scripts" class="headerlink" title="窥探react-scripts"></a>窥探react-scripts</h3><p>项目的<code>package.json</code>文件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "start": "react-scripts start",</span><br><span class="line">    "build": "react-scripts build",</span><br><span class="line">    "test": "react-scripts test --env=jsdom",</span><br><span class="line">    "eject": "react-scripts eject"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义<code>npm scripts</code>的<code>start</code>处执行了<code>react-scripts start</code>。此时我们将视角转向<code>node_modules</code>下的<code>react-scripts</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// react-scripts/package.json</span><br><span class="line">"bin": &#123;</span><br><span class="line">"react-scripts-ts": "./bin/react-scripts-ts.js"</span><br><span class="line">&#125;,</span><br><span class="line">"dependencies": &#123;</span><br><span class="line">    "autoprefixer": "7.1.6",</span><br><span class="line">    "babel-jest": "^22.1.0",</span><br><span class="line">    "babel-loader": "^7.1.2",</span><br><span class="line">    "babel-preset-react-app": "^3.1.1",</span><br><span class="line">    ...</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p><code>bin</code> 表示react-scripts的可执行文件指向了<code>./bin/react-scripts.js</code>。即<code>环境变量Path</code>中安装了<code>react-scripts</code>，执行<code>react-scripts</code>时便指向<code>react-scripts.js</code>。后面的dependencies都是所需配置的依赖。</p>
+<p><img src="/images/react_ts_script.png" alt="/bin/react-scripts.js"></p>
+<p>看到这里就恍然大悟了。这里<code>start build</code>等命令都指向了<code>scripts/start.js</code>等文件。<code>start.js</code> <code>build.js</code>里面就是webpack、devServer等开发环境和生产环境的配置</p>
+<h3 id="配置typescript"><a href="#配置typescript" class="headerlink" title="配置typescript"></a>配置typescript</h3><p>注意我们使用create-react-app使用自定义包安装react-scripts-ts。<br>即<code>create-react-app foo --scripts-version=react-scripts-ts</code></p>
+<blockquote>
+<p>react-scripts-ts is a set of adjustments to take the standard create-react-app project pipeline and bring TypeScript into the mix.</p>
+</blockquote>
+<p>配置完成后目录结构如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">│   ├── favicon.ico</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── manifest.json</span><br><span class="line">├── src</span><br><span class="line">│   ├── App.css</span><br><span class="line">│   ├── App.test.tsx</span><br><span class="line">│   ├── App.tsx</span><br><span class="line">│   ├── index.css</span><br><span class="line">│   ├── index.tsx</span><br><span class="line">│   ├── logo.svg</span><br><span class="line">│   └── registerServiceWorker.ts</span><br><span class="line">├── images.d.ts</span><br><span class="line">├── package.json</span><br><span class="line">├── README.md</span><br><span class="line">├── tsconfig.json</span><br><span class="line">├── tsconfig.prod.json</span><br><span class="line">├── tsconfig.test.json</span><br><span class="line">└── tslint.json</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>image.d.ts</p>
+<p>定义了静态资源图片的类型。不定义的话直接import,Typescript会报错<code>Cannot find module &#39;./logo.png&#39;.</code></p>
+</li>
+<li><p>tsconfig.json</p>
+<p>ts配置</p>
+<p>|   Key   |  Value |<br>| :—— | :——|<br>|  target | 转换后的目标语言。可选es6 es5。默认es5 |<br>|  jsx    | react|</p>
+</li>
+</ul>
+<h3 id="配置node-sass"><a href="#配置node-sass" class="headerlink" title="配置node-sass"></a>配置node-sass</h3><blockquote>
+<p>Note: facebook官方推荐使用node-sass-chokidar  </p>
+<ul>
+<li>node-sass has been reported as having the following issues:  </li>
+<li>node-sass –watch has been reported to have performance issues in certain conditions when used in a virtual machine or with docker.  </li>
+<li>Infinite styles compiling <a href="https://github.com/facebookincubator/create-react-app/issues/1939" target="_blank" rel="noopener">#1939</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><p>node-sass has been reported as having issues with detecting new files in a directory <a href="https://github.com/sass/node-sass/issues/1891" target="_blank" rel="noopener">#1891</a></p>
+</li>
+<li><p>node-sass-chokidar is used here as it addresses these issues.</p>
+</li>
+</ul>
+<p>这里有一个问题就是node-sass-chokidar依赖node-sass包。所以执行<code>npm i node-sass-chokidar -S</code>时可能会提示安装node-sass错误。无论使用<code>npm</code>或<code>cnpm</code>或<code>yarn</code>都会有这个情况。此处的解决方案如下：</p>
+<ol>
+<li><p>先将registry指向淘宝的镜像源</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#npm</span></span><br><span class="line">npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br><span class="line"><span class="comment">#yarn</span></span><br><span class="line">yarn config <span class="built_in">set</span> registry http://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定node-sass二进制文件下载源：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#npm</span></span><br><span class="line">npm config <span class="built_in">set</span> sass-binary-site http://npm.taobao.org/mirrors/node-sass</span><br><span class="line"><span class="comment">#yarn</span></span><br><span class="line">yarn config <span class="built_in">set</span> sass-binary-site http://npm.taobao.org/mirrors/node-sass</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>或者可以通过执行<code>node -p &quot;[process.platform, process.arch, process.versions.modules].join(&#39;-&#39;)&quot;</code>。执行结果为<code>win32-x64-57</code>。到淘宝镜像<a href="https://npm.taobao.org/mirrors/node-sass/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/node-sass/</a>下载node-sass的对应名称的二进制文件<code>win32-x64-57_binding.node</code>。再设置sass二进制文件路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#npm</span></span><br><span class="line">npm config <span class="built_in">set</span> sass-binary-path e:/web/win32-x64-57_binding.node</span><br><span class="line"><span class="comment">#yarn</span></span><br><span class="line">yarn config <span class="built_in">set</span> sass-binary-path e:/web/win32-x64-57_binding.node</span><br></pre></td></tr></table></figure>
+<p>最后执行<code>npm i node-sass-chokidar -S</code>进行安装</p>
+<blockquote>
+<p>Note: 由于此处node-sass依赖绑定了本地文件，将无法更新node-sass.所以尽量考虑第一种方案</p>
+</blockquote>
+<h2 id="将项目跑起来"><a href="#将项目跑起来" class="headerlink" title="将项目跑起来"></a>将项目跑起来</h2><h3 id="定义处理sass的npm-scripts"><a href="#定义处理sass的npm-scripts" class="headerlink" title="定义处理sass的npm scripts"></a>定义处理sass的<code>npm scripts</code></h3><p>由于我们上面安装了node-sass模块。将css文件全部改为scss后，需要在项目的package.json中增加处理scss的scripts</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">+    "build-css": "node-sass-chokidar src/ -o src/",</span><br><span class="line">+    "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive",</span><br><span class="line">     "start": "react-scripts start",</span><br><span class="line">     "build": "react-scripts build",</span><br><span class="line">     "test": "react-scripts test --env=jsdom",</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将src目录下的scss文件编译后输出css文件到src下的同级目录</span></span><br><span class="line">node-sass-chokidar  src/ -o src/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#以递归方式监视src目录下的scss文件。并在同级下生成css文件</span></span><br><span class="line">node-sass-chokidar src/ -o src/ --watch --recursive</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: 如果在scss文件中想alias引入某个文件夹下的样式文件。可配置 <code>node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/</code></p>
+</blockquote>
+<p>就可以像这样引入</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">import</span> <span class="string">'styles/_colors.scss'</span>; <span class="comment">//假设styles目录在src下</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">'bootstrap/index.scss'</span>; <span class="comment">//从node_modules目录下引入bootstrap下的样式文件</span></span><br></pre></td></tr></table></figure>
+<p>接着就可以修改App.scss，之后src目录下就会生成css文件。由于js里引入的依旧是css，所以其他都不用改动。</p>
+<blockquote>
+<p>经验: 这里使用Vscode可能会出现一个兼容性问题。就是vscode在编辑文件时会将文件处于lock状态，按下保存后由于node-sass-chokidar一直在后台监听文件改动，此时文件处于lock状态，就会就会报文件读写错误</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">=&gt; changed:  </span><br><span class="line">I:\self\my-app\src\App.scss</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"status"</span>: 3,</span><br><span class="line">  <span class="string">"message"</span>: <span class="string">"File to read not found or unreadable: I:/self/my-app/src/App.scss"</span>,</span><br><span class="line">  <span class="string">"formatted"</span>: <span class="string">"Internal Error: File to read not found or unreadable: I:/self/my-app/src/App.scss\n"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解决方案：<br>使用node-sass-chokidar的watch轮询配置选项,<br><code>use-polling</code>表示监听使用轮询方式<br><code>polling-interval</code>代表文件预热间隔(大致理解为监听间隔) 默认100</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">'  --use-polling              Watch using polling (chokidars\'s polling option)',</span><br><span class="line">'  --polling-interval         Interval of filesystem folling if polling is being used'</span><br></pre></td></tr></table></figure>
+<p>所以最终的<code>npm scripts</code>可能是这样</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">"scripts": &#123;</span><br><span class="line">    "build-css": "node-sass-chokidar src/ -o src/",</span><br><span class="line">    "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive --use-polling --polling-interval 200",</span><br><span class="line">    "start-js": "react-scripts-ts start",</span><br><span class="line">    "build-js": "react-scripts-ts build",</span><br><span class="line">    "start": "npm-run-all -p watch-css start-js",</span><br><span class="line">    "build": "npm-run-all build-css build-js",</span><br><span class="line">    "test": "react-scripts-ts test --env=jsdom",</span><br><span class="line">    "eject": "react-scripts-ts eject"</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="将npm-srcipts流程打通"><a href="#将npm-srcipts流程打通" class="headerlink" title="将npm srcipts流程打通"></a>将<code>npm srcipts</code>流程打通</h3><p>我们想<code>npm start</code>就能完成sass编译以及运行react-scripts提供的配置。此时我们需要安装<code>npm-run-all</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#npm</span></span><br><span class="line">npm i npm-run-all -S</span><br><span class="line"><span class="comment">#yarn</span></span><br><span class="line">yarn add npm-run-all</span><br></pre></td></tr></table></figure>
+<p>然后将<code>start</code>和<code>build</code>改成包含css预处理的命令</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">     "build-css": "node-sass-chokidar src/ -o src/",</span><br><span class="line">     "watch-css": "npm run build-css &amp;&amp; node-sass-chokidar src/ -o src/ --watch --recursive",</span><br><span class="line">-    "start": "react-scripts start",</span><br><span class="line">-    "build": "react-scripts build",</span><br><span class="line">+    "start-js": "react-scripts start",</span><br><span class="line">+    "start": "npm-run-all -p watch-css start-js",</span><br><span class="line">+    "build-js": "react-scripts build",</span><br><span class="line">+    "build": "npm-run-all build-css build-js",</span><br><span class="line">     "test": "react-scripts test --env=jsdom",</span><br><span class="line">     "eject": "react-scripts eject"</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>npm start</code></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #757575;
+            text-shadow: 0;
+            display: none
+        }
+</style>
+	
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn">阅读评论（请确保 disqus 可以正常加载）</button>
+</div>
+
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://shsgear.github.io/2018/08/12/react项目整合/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://shsgear.github.io/2018/08/12/react项目整合/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/ls-javascript" id="disqus-lazy-load-script">
+    $.ajax({
+        url: 'https://disqus.com/next/config.json',
+        timeout: 4000,
+        type: 'GET',
+        success: (function() {
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+            $('.disqus_click_btn').css('display','none');
+        })(),
+        error: function() {
+          $('.disqus_click_btn').css('display','block');
+        }
+    });
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.disqus_click_btn').css('display','none');
+    });
+</script>
+  	
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/10/10/change-hexo-theme/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/08/03/es6/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/my_avatar.jpg" alt="Shsgear's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        shsgear@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:shsgear@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/10/">十月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/javascript/">javascript<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/javascript/React/">React<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/javascript/React/npm/">npm<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/javascript/es6/">es6<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/javascript/优化/">优化<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/javascript-es6/">javascript es6<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/吹水/">吹水<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="shsgear@qq.com" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;Shsgear's Blog
+            
+                <br>
+                
+                    <a href="https://music.163.com/#/song?id=27089346">Let us give up the phunk.</a>
+                
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 0000;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
