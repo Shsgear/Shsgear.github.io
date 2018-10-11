@@ -1,43 +1,75 @@
-# Documentation
+# My Blog
 
-## 根目录Blog文件夹与github的blog仓库[https://github.com/Shsgear/Blog](https://github.com/Shsgear/Blog)同步
+- ## Info
 
-## 执行hexo g && hexo d后生成的.deploy_git是部署到Shsgear.github.io仓库的[https://github.com/Shsgear/Shsgear.github.io](https://github.com/Shsgear/Shsgear.github.io)
+### Branch Usage
 
----
+1. default branch:  `blog-src`, for hexo blog resource and source code.
 
-## hexo 基本命令
+2. github pages: github pages must be built from the `master` branch. `master` branch is for built posts files, CNAME file ...etc
 
-### 新建文章
+- ## Travis Ci
 
-``` bash
-$ hexo new "My New Post"
+``` yaml
+language: node_js
+node_js: stable
+
+install:
+  - npm install
+
+
+script:
+  - hexo g
+
+after_script:
+  - cd public
+  - git init
+  - git config user.name "shsgear"
+  - git config user.email "shsgear@qq.com"
+  - git add .
+  - git commit -m "update blog"
+  - git push --force --quiet "https://${githubBlog}@${GH_REF}" master:master
+
+branches:
+  only:
+    - blog-src
+
+env:
+ global:
+   - GH_REF: github.com/Shsgear/Shsgear.github.io.git
 ```
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+[Travis-CI-Contol-Board](https://travis-ci.com/Shsgear/Shsgear.github.io)
 
-### Run server
+### what travis do:
 
-``` bash
-$ hexo server
+### 1. prepare node environment
+
+``` yaml
+language: node_js
+node_js: stable
 ```
 
-More info: [Server](https://hexo.io/docs/server.html)
+use the stable version of nodejs.
 
-### 生成静态文件
+### 2. install dependencies
 
-``` bash
-$ hexo generate
-```
+### 3. execute script (here is `hexo g`)
 
-More info: [Generating](https://hexo.io/docs/generating.html)
+generate built post files
 
-### 部署到远程站点
+### 4. push built files in  `/public` to remote repository
 
-``` bash
-$ hexo deploy
-```
+> git push --force --quiet "https://${githubBlog}@${GH_REF}" master:master
 
-ps: 远程站点配置在_config.yml的deploy处配置
+`githubBlog` , `GH_REF` are environment variables defined by travis control board or your self.
 
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+`githubBlog` is defined in [Travis-CI-Contol-Board](https://travis-ci.com/Shsgear/Shsgear.github.io) by ourself. it's value was is a github AccessToken. See `Github > User > Settings > Developer settings > Personal access tokens`  
+
+`GH_REF` is defined in `.travis.yaml`. The value of this variable is a web URL of this remote repository
+
+- ## Link
+
+### [http://shsgear.top](http://shsgear.top)
+
+### [http://shsgear.github.io/](https://shsgear.github.io/)
