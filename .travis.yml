@@ -17,7 +17,13 @@ after_script:
   - git commit -m "update blog"
   - git push --force --quiet "https://${githubBlog}@${GH_REF}" master:master
 
+# blocklist
+branches:
+  except:
+  - legacy
+  - experimental
 
+# safelist
 branches:
   only:
     - blog-src

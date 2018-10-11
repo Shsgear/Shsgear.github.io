@@ -30,6 +30,7 @@ after_script:
   - git commit -m "update blog"
   - git push --force --quiet "https://${githubBlog}@${GH_REF}" master:master
 
+#safe list
 branches:
   only:
     - blog-src
@@ -67,6 +68,10 @@ generate built post files
 `githubBlog` is defined in [Travis-CI-Contol-Board](https://travis-ci.com/Shsgear/Shsgear.github.io) by ourself. it's value was is a github AccessToken. See `Github > User > Settings > Developer settings > Personal access tokens`  
 
 `GH_REF` is defined in `.travis.yaml`. The value of this variable is a web URL of this remote repository
+
+### Additions
+
+`branch` in `.travis.yml`  Specify which branches to build using a safelist, or blocklist branches that you do not want to be built
 
 - ## Link
 
