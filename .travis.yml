@@ -15,7 +15,7 @@ after_script:
   - git config user.email "shsgear@qq.com"
   - git add .
   - git commit -m "update blog"
-  - git push --force --quiet "https://${githubBlog}@${GH_REF}"
+  - git push --force --quiet "https://${githubBlog}@${GH_REF}" master:master
 
 
 branches:
