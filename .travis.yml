@@ -1,0 +1,20 @@
+language: node_js
+node_js: stable
+
+install: 
+  - npm install
+
+
+before_script: 
+
+script: 
+  - hexo g
+
+after_script:
+  - cd public
+  - git init
+  - git config user.name "shsgear"
+  - git config user.email "shsgear@qq.com"
+  - git add .
+  - git commit -m "update blog"
+  - git push -f  
