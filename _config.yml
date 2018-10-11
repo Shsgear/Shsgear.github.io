@@ -6,7 +6,7 @@
 title: Shsgear's Blog
 subtitle: anything i want to write down
 description: You just activated my trap card :D
-keywords: javascript blog
+keywords: shsgear javascript blog front_end 前端  
 author: Shsgear
 language: zh-CN
 timezone:
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: material
 
 
 

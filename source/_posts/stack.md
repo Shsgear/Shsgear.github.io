@@ -1,6 +1,7 @@
 ---
 title: JavaScript中的变量对象与堆栈
 date: 2018-08-03 15:47:05
+categories: javascript es6
 tags: 
       - javascript
       - stack
