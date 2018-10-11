@@ -6,9 +6,9 @@
     "version": "3.7.1"
   },
   "scripts": {
-    "predone": "echo '/************************\n exuting hexo clean and hexo deploy \n ********************/'",
-    "done": "hexo clean && hexo g && hexo d",
-    "postdone": "echo '/*************************\n finish \n *****************************/'"
+    // "predone": "echo '/************************\n exuting hexo clean and hexo deploy \n ********************/'",
+    // "done": "hexo clean && hexo g && hexo d",
+    // "postdone": "echo '/*************************\n finish \n *****************************/'"
   },
   "dependencies": {
     "hexo": "^3.2.0",
